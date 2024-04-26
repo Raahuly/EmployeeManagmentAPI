@@ -1,0 +1,6 @@
+@COREANDREACTPROJECT_HostAddress = http://localhost:5067
+
+GET {{COREANDREACTPROJECT_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
