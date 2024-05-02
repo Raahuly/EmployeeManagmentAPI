@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("COREANDREACTPROJECT")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a642683ef402bab637d94349253592aa3fda0b01")]
 [assembly: System.Reflection.AssemblyProductAttribute("COREANDREACTPROJECT")]
 [assembly: System.Reflection.AssemblyTitleAttribute("COREANDREACTPROJECT")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -33,6 +33,10 @@ namespace REPOSITORY
 
                 if (rowsAffected > 0)
                 {
+                    string COUNTUSER = "SELECT COUNT(*) FROM Register WHERE [USER] = @USER AND PASSWORD = @PASSWORD";
+
+                    int CountAffect = conn.Execute(COUNTUSER, EM);
+
                     res.STATUS = "Success";
                     res.MSG = "Regiser SuccessFully";
                     res.STATUSCODE = 200;

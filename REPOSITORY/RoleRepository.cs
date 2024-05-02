@@ -13,6 +13,7 @@ namespace REPOSITORY
 {
     public class RoleRepository
     {
+
         private readonly IConfiguration _configuration;
 
         public RoleRepository(IConfiguration configuration)
@@ -26,21 +27,37 @@ namespace REPOSITORY
 
             using (IDbConnection conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
-                string query = "insert into RoleTable(RoleName, Active) values (@RoleName, 1)";
 
-                int rowsAffected = conn.Execute(query, RM);
+                string countRole = "select count(*) from RoleTable where Active = 1 and RoleName = @RoleName";
 
-                if (rowsAffected > 0)
+                int CountRoleTable = conn.Execute(countRole, RM);
+
+                if (CountRoleTable <= 0)
                 {
-                    res.STATUS = "Success";
-                    res.MSG = "Add Successfully";
-                    res.STATUSCODE = 200;
+
+                    string query = "insert into RoleTable(RoleName, Active) values (@RoleName, 1)";
+
+                    int rowsAffected = conn.Execute(query, RM);
+
+                    if (rowsAffected > 0)
+                    {
+                        res.STATUS = "Success";
+                        res.MSG = "Add Successfully";
+                        res.STATUSCODE = 200;
+                    }
+                    else
+                    {
+                        res.STATUS = "Error";
+                        res.MSG = "Failed to add employee";
+                        res.STATUSCODE = 500;
+                    }
                 }
+
                 else
                 {
                     res.STATUS = "Error";
-                    res.MSG = "Failed to add employee";
-                    res.STATUSCODE = 500;
+                    res.MSG = "This role Already Exists";
+                    res.STATUSCODE = 450;
                 }
 
             }
@@ -66,7 +83,7 @@ namespace REPOSITORY
             }
         }
 
-        public ResponseStatusModel Delete(int Id)
+        public ResponseStatusModel Delete(int RoleId)
         {
             ResponseStatusModel res = new ResponseStatusModel();
 
@@ -74,12 +91,12 @@ namespace REPOSITORY
             {
 
                 string queryExist = "SELECT COUNT(*) FROM RoleTable WHERE ACTIVE = 1 AND RoleId = @RoleId";
-                int count = conn.QuerySingleOrDefault<int>(queryExist, new {Id});
+                int count = conn.QuerySingleOrDefault<int>(queryExist, new { RoleId });
 
                 if (count > 0)
                 {
                     string queryDelete = "UPDATE RoleTable SET Active = 0 WHERE RoleId = @RoleId";
-                    int rowsAffected = conn.Execute(queryDelete, new { Id });
+                    int rowsAffected = conn.Execute(queryDelete, new { RoleId });
 
                     if (rowsAffected > 0)
                     {

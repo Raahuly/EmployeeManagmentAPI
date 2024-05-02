@@ -72,12 +72,12 @@ namespace COREANDREACTPROJECT.Controllers
             }
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<ActionResult<IEnumerable<RoleClass>>> Delete(int Id)
+        [HttpDelete("{RoleId}")]
+        public async Task<ActionResult<IEnumerable<RoleClass>>> Delete(int RoleId)
         {
             try
             {
-                var roles = _roleRepository.Delete(Id);
+                var roles = _roleRepository.Delete(RoleId);
                 return Ok(roles);
             }
             catch (Exception ex)
